@@ -23,7 +23,6 @@ public class Menu_principal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
-    ArrayList<tienda> lista_tienda = new ArrayList();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -54,6 +53,11 @@ public class Menu_principal extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(238, 112, 82));
@@ -210,6 +214,17 @@ public class Menu_principal extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 470));
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuBar1.setBorder(null);
+        jMenuBar1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jMenuBar1MouseDragged(evt);
+            }
+        });
+        jMenuBar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuBar1MousePressed(evt);
+            }
+        });
 
         jMenu1.setBackground(new java.awt.Color(255, 255, 255));
         jMenu1.setBorder(null);
@@ -376,6 +391,22 @@ public class Menu_principal extends javax.swing.JFrame {
         mayo.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnMayor_VentaActionPerformed
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        
+    }//GEN-LAST:event_jPanel1MousePressed
+int xx,xy;
+    private void jMenuBar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuBar1MousePressed
+      xx = evt.getX();
+      xy = evt.getY();
+    }//GEN-LAST:event_jMenuBar1MousePressed
+
+    private void jMenuBar1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuBar1MouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        
+        setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_jMenuBar1MouseDragged
 
     /**
      * @param args the command line arguments

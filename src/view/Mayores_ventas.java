@@ -7,6 +7,9 @@ package view;
 
 import java.text.Normalizer;
 import javax.swing.JOptionPane;
+import java.util.AbstractList;
+import controller.Tienda_controller;
+import model.Sueldo;
 
 /**
  *
@@ -20,8 +23,10 @@ public class Mayores_ventas extends javax.swing.JFrame {
     public Mayores_ventas() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
     }
-
+    
+    Tienda_controller tienco = new Tienda_controller();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,6 +38,10 @@ public class Mayores_ventas extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblMayoresVentas = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        btnGenerar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -64,9 +73,45 @@ public class Mayores_ventas extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 392, 140, 30));
 
+        jScrollPane1.setBorder(null);
+
+        tblMayoresVentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo Vendedor", "Nombre Vendedor", "Total Ventas", "Sueldo Vendedor"
+            }
+        ));
+        jScrollPane1.setViewportView(tblMayoresVentas);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 600, 170));
+
+        jLabel1.setBackground(new java.awt.Color(238, 112, 82));
+        jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph.png"))); // NOI18N
+        jLabel1.setText("MAYORES VENTAS");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 140, 40));
+
+        btnGenerar.setBackground(new java.awt.Color(204, 204, 204));
+        btnGenerar.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
+        btnGenerar.setForeground(new java.awt.Color(238, 112, 82));
+        btnGenerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/estadisticas.png"))); // NOI18N
+        btnGenerar.setText("GENERAR ESTADISTICAS");
+        btnGenerar.setBorder(null);
+        btnGenerar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 170, 30));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 460));
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuBar1.setBorder(null);
 
         jMenu1.setBackground(new java.awt.Color(255, 255, 255));
         jMenu1.setForeground(new java.awt.Color(238, 112, 82));
@@ -125,6 +170,10 @@ public class Mayores_ventas extends javax.swing.JFrame {
         this.setState(Mayores_ventas.ICONIFIED);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+       
+    }//GEN-LAST:event_btnGenerarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -136,7 +185,7 @@ public class Mayores_ventas extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -161,11 +210,15 @@ public class Mayores_ventas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGenerar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblMayoresVentas;
     // End of variables declaration//GEN-END:variables
 }

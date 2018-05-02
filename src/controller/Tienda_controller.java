@@ -8,18 +8,35 @@ package controller;
 import controller.Tienda_controller;
 import model.tienda;
 import java.util.ArrayList;
+import javax.swing.JTable;
+import model.Sueldo;
 
 public class Tienda_controller {
 
     tienda moti = new tienda();
-    ArrayList<tienda> lista_venta = new ArrayList();
+   
+    static ArrayList<tienda> lista_venta = new ArrayList();
+    static ArrayList<Sueldo> lista_sueldo = new ArrayList();
+    
+    public ArrayList<Sueldo> getLista_sueldo() {
+        return lista_sueldo;
+    }
+
+    public void setLista_sueldo(ArrayList<Sueldo> lista_sueldo) {
+        Tienda_controller.lista_sueldo = lista_sueldo;
+    }
+    
 
     public void create(tienda moti) {
         lista_venta.add(moti);
+       
     }
 
-    public void update(int index, tienda moti) {
+    public void update(int index, tienda moti, javax.swing.JTable tblventa , javax.swing.JTable tblregistroventa) {
         lista_venta.set(index, moti);
+        adminTabla(tblventa);
+        admintable(tblregistroventa);
+       
 
     }
 
@@ -37,8 +54,10 @@ public class Tienda_controller {
         return Get;
     }
 
-    public void delete(int index) {
+    public void delete(int index, javax.swing.JTable tblventa, javax.swing.JTable tblregistroventa) {
         lista_venta.remove(index);
+        adminTabla(tblventa);
+        admintable(tblregistroventa);
     }
 
     public int result() {
@@ -129,5 +148,4 @@ public class Tienda_controller {
         }
 
     }
-
 }

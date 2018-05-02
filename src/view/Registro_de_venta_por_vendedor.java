@@ -4,10 +4,14 @@
  * and open the template in the editor.
  */
 package view;
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import controller.Tienda_controller;
+import controller.sueldo_controller;
+import java.awt.event.KeyEvent;
 import model.tienda;
+import model.Sueldo;
 import view.*;
 
 /**
@@ -23,10 +27,14 @@ public class Registro_de_venta_por_vendedor extends javax.swing.JFrame {
         initComponents();
         setResizable(true);
         setLocationRelativeTo(null);
+        tiendaco.admintable(tblRegistroVenta);
+        
     }
 
     Tienda_controller tiendaco = new Tienda_controller();
+    sueldo_controller suco = new sueldo_controller();
     int tend;
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -85,6 +93,11 @@ public class Registro_de_venta_por_vendedor extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         txtNombreVende.setBackground(new java.awt.Color(204, 204, 204));
+        txtNombreVende.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreVendeKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNombreVende, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 130, -1));
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
@@ -93,6 +106,11 @@ public class Registro_de_venta_por_vendedor extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, -1));
 
         txtCodigoVende.setBackground(new java.awt.Color(204, 204, 204));
+        txtCodigoVende.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoVendeKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCodigoVende, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 130, -1));
 
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
@@ -106,6 +124,11 @@ public class Registro_de_venta_por_vendedor extends javax.swing.JFrame {
                 txtCantidadVendidasActionPerformed(evt);
             }
         });
+        txtCantidadVendidas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadVendidasKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCantidadVendidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 130, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -115,9 +138,15 @@ public class Registro_de_venta_por_vendedor extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, -1));
 
         txtTotalVendido.setBackground(new java.awt.Color(204, 204, 204));
+        txtTotalVendido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTotalVendidoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtTotalVendido, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 130, -1));
 
         tblRegistroVenta.setBackground(new java.awt.Color(255, 255, 255));
+        tblRegistroVenta.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
         tblRegistroVenta.setForeground(new java.awt.Color(0, 0, 0));
         tblRegistroVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -154,6 +183,7 @@ public class Registro_de_venta_por_vendedor extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 670, 470));
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuBar1.setBorder(null);
         jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
 
         jMenu1.setBackground(new java.awt.Color(255, 255, 255));
@@ -197,7 +227,7 @@ public class Registro_de_venta_por_vendedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        
+
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -217,7 +247,7 @@ public class Registro_de_venta_por_vendedor extends javax.swing.JFrame {
         Menu_principal menu = new Menu_principal();
         menu.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_jToggleButton1MouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -229,10 +259,125 @@ public class Registro_de_venta_por_vendedor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCantidadVendidasActionPerformed
 
     private void btnRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegActionPerformed
-    tiendaco.create(new tienda(txtNombreVende.getText(), txtCodigoVende.getText(), Integer.parseInt( txtCantidadVendidas.getText()), Integer.parseInt(txtTotalVendido.getText())));
-    tiendaco.admintable(tblRegistroVenta);
-    txtTotalVendido.setText(String.valueOf(tiendaco.result()));
+        try {
+            if (txtCodigoVende.getText().length() == 8) {
+                tiendaco.create(new tienda(txtNombreVende.getText(), txtCodigoVende.getText(), Integer.parseInt(txtCantidadVendidas.getText()), Integer.parseInt(txtTotalVendido.getText())));
+                tiendaco.admintable(tblRegistroVenta);
+                
+                borrartxt();
+                
+            } else if (txtCodigoVende.getText().length() > 8 || txtCodigoVende.getText().length() < 8) {
+                JOptionPane.showMessageDialog(null, "El CODIGO DEL VENDEDOR es de 8 digitos.\nEl CODIGO ingresado contiene " + txtCodigoVende.getText().length() + " digitos.", "Error", 2);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Complete Todos los Campos Requeridos", "ERROR", 2);
+        }
+        
+
+
     }//GEN-LAST:event_btnRegActionPerformed
+
+    private void txtCodigoVendeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoVendeKeyTyped
+        int k = (int) evt.getKeyChar();
+        if (k >= 97 && k <= 122 || k >= 65 && k <= 90) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras", "Error Datos", JOptionPane.ERROR_MESSAGE);
+        }
+        if (k == 241 || k == 209) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras", "Error Datos", JOptionPane.ERROR_MESSAGE);
+        }
+        char caracter = evt.getKeyChar();
+
+        // Verificar si la tecla pulsada no es un digito
+        if (((caracter < '0')
+                || (caracter > '9'))
+                && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+            evt.consume();  // ignorar el evento de teclado
+        }
+
+        if (k == 8) {
+            txtCodigoVende.transferFocus();
+        }
+    }//GEN-LAST:event_txtCodigoVendeKeyTyped
+
+    private void txtNombreVendeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreVendeKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+            txtNombreVende.setCursor(null);
+
+        } else if ((int) evt.getKeyChar() > 32 && evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+            txtNombreVende.setCursor(null);
+
+        }
+
+    }//GEN-LAST:event_txtNombreVendeKeyTyped
+
+    private void txtCantidadVendidasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadVendidasKeyTyped
+        int k = (int) evt.getKeyChar();
+        if (k >= 97 && k <= 122 || k >= 65 && k <= 90) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras", "Error Datos", JOptionPane.ERROR_MESSAGE);
+        }
+        if (k == 241 || k == 209) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras", "Error Datos", JOptionPane.ERROR_MESSAGE);
+        }
+        char caracter = evt.getKeyChar();
+
+        // Verificar si la tecla pulsada no es un digito
+        if (((caracter < '0')
+                || (caracter > '9'))
+                && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+            evt.consume();  // ignorar el evento de teclado
+        }
+
+        if (k == 8) {
+            txtCodigoVende.transferFocus();
+        }
+    }//GEN-LAST:event_txtCantidadVendidasKeyTyped
+
+    private void txtTotalVendidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotalVendidoKeyTyped
+        int k = (int) evt.getKeyChar();
+        if (k >= 97 && k <= 122 || k >= 65 && k <= 90) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras", "Error Datos", JOptionPane.ERROR_MESSAGE);
+        }
+        if (k == 241 || k == 209) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras", "Error Datos", JOptionPane.ERROR_MESSAGE);
+        }
+        char caracter = evt.getKeyChar();
+
+        // Verificar si la tecla pulsada no es un digito
+        if (((caracter < '0')
+                || (caracter > '9'))
+                && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+            evt.consume();  // ignorar el evento de teclado
+        }
+
+        if (k == 8) {
+            txtCodigoVende.transferFocus();
+        }
+    }//GEN-LAST:event_txtTotalVendidoKeyTyped
+    public void borrartxt() {
+        String b = "";
+        txtCantidadVendidas.setText(b);
+        txtCodigoVende.setText(b);
+        txtNombreVende.setText(b);
+        txtTotalVendido.setText(b);
+
+    }
 
     /**
      * @param args the command line arguments
@@ -245,7 +390,7 @@ public class Registro_de_venta_por_vendedor extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

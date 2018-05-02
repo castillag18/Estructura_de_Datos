@@ -7,8 +7,11 @@ package view;
 
 import model.tienda;
 import controller.Tienda_controller;
+import controller.sueldo_controller;
 import java.util.AbstractList;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import model.Sueldo;
 
 public class Sueldo_a_pagar extends javax.swing.JFrame {
 
@@ -18,8 +21,10 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
     public Sueldo_a_pagar() {
         initComponents();
         this.setLocationRelativeTo(null);
+        sumo.admintabla1(tblSueldoPagar);
     }
-
+    Tienda_controller tienco = new Tienda_controller();
+    sueldo_controller sumo = new sueldo_controller();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,7 +35,13 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtDigiteCodigo = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        btnConsultar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblSueldoPagar = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -43,28 +54,75 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(238, 112, 82));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/left-arrow.png"))); // NOI18N
-        jButton1.setText("Regresar al Menu");
-        jButton1.setBorder(null);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRegresar.setBackground(new java.awt.Color(204, 204, 204));
+        btnRegresar.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(238, 112, 82));
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/left-arrow.png"))); // NOI18N
+        btnRegresar.setText("Regresar al Menu");
+        btnRegresar.setBorder(null);
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnRegresarMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 374, 130, 30));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 130, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 440));
+        jLabel1.setBackground(new java.awt.Color(238, 112, 82));
+        jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel1.setText("Digite su Codigo:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+
+        txtDigiteCodigo.setBackground(new java.awt.Color(204, 204, 204));
+        txtDigiteCodigo.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(txtDigiteCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 150, -1));
+
+        jLabel2.setBackground(new java.awt.Color(238, 112, 82));
+        jLabel2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cash.png"))); // NOI18N
+        jLabel2.setText("CONSULTA DE SALDO");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 150, 30));
+
+        btnConsultar.setBackground(new java.awt.Color(204, 204, 204));
+        btnConsultar.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
+        btnConsultar.setForeground(new java.awt.Color(238, 112, 82));
+        btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscar.png"))); // NOI18N
+        btnConsultar.setText("Consultar");
+        btnConsultar.setBorder(null);
+        btnConsultar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, 100, 30));
+
+        tblSueldoPagar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo", "Saldo"
+            }
+        ));
+        jScrollPane1.setViewportView(tblSueldoPagar);
+        if (tblSueldoPagar.getColumnModel().getColumnCount() > 0) {
+            tblSueldoPagar.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 610, 180));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 670, 470));
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuBar1.setBorder(null);
 
         jMenu1.setBackground(new java.awt.Color(255, 255, 255));
         jMenu1.setForeground(new java.awt.Color(238, 112, 82));
@@ -101,15 +159,26 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        ArrayList<tienda> mayores = tienco.getLista_venta();
+        
+        
+        
+        for (int i = 0; i < tienco.getLista_venta().size(); i++) {
+            tienco.getLista_sueldo().add(new Sueldo(
+                    0,
+                    tienco.getLista_venta().get(i).getCodigo_del_vende(),
+                    tienco.getLista_venta().get(i).getTotal_Vendido_en_pesos()
+            ));
+        }
+        
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         Menu_principal menu = new Menu_principal();
         menu.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         int cerrarr = JOptionPane.YES_NO_OPTION;
@@ -122,6 +191,11 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
     this.setState(Sueldo_a_pagar.ICONIFIED);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+    sumo.Read(txtDigiteCodigo.getText());
+    sumo.admintabla1(tblSueldoPagar);
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,11 +233,17 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnRegresar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private static javax.swing.JTable tblSueldoPagar;
+    private javax.swing.JTextField txtDigiteCodigo;
     // End of variables declaration//GEN-END:variables
 }
