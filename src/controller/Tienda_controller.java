@@ -103,7 +103,7 @@ public class Tienda_controller {
         Object[][] matriz = new Object[lista_venta.size()][4];
         for (int i = 0; i < lista_venta.size(); i++) {
             matriz[i][0] = lista_venta.get(i).getNombre_vende();
-            matriz[i][1] = lista_venta.get(i).getCodigo_vende();
+            matriz[i][1] = lista_venta.get(i).getCodigo_del_vende();
             matriz[i][2] = lista_venta.get(i).getCantidades_totales_vendidas();
             matriz[i][3] = lista_venta.get(i).getTotal_Vendido_en_pesos();
 

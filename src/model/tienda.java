@@ -19,7 +19,6 @@ public class tienda {
     private int total_compra;
 
     private String Nombre_vende;
-    private String Codigo_vende;
     private int Cantidades_totales_vendidas;
     private double Total_Vendido_en_pesos;
 
@@ -31,7 +30,7 @@ public class tienda {
         this.Cantidad_vendida = Cantidad_vendida;
         this.total_compra = total_compra;
         this.Nombre_vende = Nombre_vende;
-        this.Codigo_vende = Codigo_vende;
+        
         this.Cantidades_totales_vendidas = Cantidades_totales_vendidas;
         this.Total_Vendido_en_pesos = Total_Vendido_en_pesos;
     }
@@ -50,14 +49,15 @@ public class tienda {
 
     public tienda(String Nombre_vende, String Codigo_vende, int Cantidades_totales_vendidas, double Total_Vendido_en_pesos) {
         this.Nombre_vende = Nombre_vende;
-        this.Codigo_vende = Codigo_vende;
+        
         this.Cantidades_totales_vendidas = Cantidades_totales_vendidas;
         this.Total_Vendido_en_pesos = Total_Vendido_en_pesos;
     }
 
-    public tienda(String Codigo_del_vende, double Total_Vendido_en_pesos) {
+    public tienda(String Codigo_del_vende, double Total_Vendido_en_pesos, int Cantidades_totales_vendidas) {
         this.Codigo_del_vende = Codigo_del_vende;
         this.Total_Vendido_en_pesos = Total_Vendido_en_pesos;
+        this.Cantidades_totales_vendidas = Cantidades_totales_vendidas;
     }
 
     public String getCodigo_del_vende() {
@@ -114,16 +114,9 @@ public class tienda {
 
     public void setNombre_vende(String Nombre_vende) {
         this.Nombre_vende = Nombre_vende;
-    }
+    }   
 
-    public String getCodigo_vende() {
-        return Codigo_vende;
-    }
-
-    public void setCodigo_vende(String Codigo_vende) {
-        this.Codigo_vende = Codigo_vende;
-    }
-
+ 
     public int getCantidades_totales_vendidas() {
         return Cantidades_totales_vendidas;
     }

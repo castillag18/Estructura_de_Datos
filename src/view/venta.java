@@ -314,7 +314,7 @@ public class venta extends javax.swing.JFrame {
                 txtTotalVenta.setText(String.valueOf(tiendaco.result()));
                 borrartxt();
                 
-                tiendaco.getLista_sueldo().add(new Sueldo)
+                //tiendaco.getLista_sueldo().add(new Sueldo)
                 
             } else {
                 JOptionPane.showMessageDialog(null, "los CODIGOS debe tener 8 digitos");

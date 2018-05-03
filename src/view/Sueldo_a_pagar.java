@@ -163,17 +163,56 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        ArrayList<tienda> mayores = tienco.getLista_venta();
-
-        for (int i = 0; i < tienco.getLista_venta().size(); i++) {
-            tienco.getLista_sueldo().add(new Sueldo(
-                    0,
-                    tienco.getLista_venta().get(i).getCodigo_del_vende(),
-                    tienco.getLista_venta().get(i).getTotal_Vendido_en_pesos()
-            ));
-        }
+        
 
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    public void test() {
+        ArrayList<tienda> mayores = tienco.getLista_venta();
+        boolean cod_unico = false;
+        int index_unico = 0;
+
+        for (int x = 0; x != (tienco.getLista_venta().size() - 1); x++) {
+
+            for (int i = 0; i < tienco.getLista_venta().size(); i++) {
+                for (int j = 0; j < tienco.getLista_venta().size(); j++) {
+
+                    if (tienco.getLista_sueldo().get(i).getCodigo_del_vende().equals(tienco.getLista_venta().get(j).getCodigo_del_vende())) {
+                        cod_unico = true;
+                        index_unico = i;
+                    }
+
+                }
+            }
+
+            if (cod_unico) {
+                tienco.getLista_sueldo().add(new Sueldo(
+                        0,
+                        tienco.getLista_venta().get(index_unico).getCodigo_del_vende(),
+                        0,
+                        0
+                ));
+            }
+        }
+
+    }
+
+    public boolean codigo_existe(String codigo) {
+
+        boolean cod_unico = false;
+
+        for (int j = 0; j < tienco.getLista_venta().size(); j++) {
+
+            if (codigo.equals(tienco.getLista_venta().get(j).getCodigo_del_vende())) {
+                cod_unico = true;
+            }
+
+        }
+
+        return cod_unico;
+
+    }
+
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         Menu_principal menu = new Menu_principal();

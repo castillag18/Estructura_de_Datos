@@ -45,7 +45,7 @@ public class sueldo_controller {
      public void admintabla1(javax.swing.JTable tblSueldoPagar) {
         Object[][] matriz = new Object[lista_vedidos.size()][2];
         for (int i = 0; i < lista_vedidos.size(); i++) {
-            matriz[i][0] = lista_vedidos.get(i).getCodigo_vende();
+            matriz[i][0] = lista_vedidos.get(i).getCodigo_del_vende();
             matriz[i][1] = lista_vedidos.get(i).getSueldo();
         }
 
