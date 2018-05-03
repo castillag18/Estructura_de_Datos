@@ -6,10 +6,10 @@
 
 package controller;
 import controller.Tienda_controller;
-import static controller.Tienda_controller.lista_sueldo;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import model.Sueldo;
+import static controller.Tienda_controller.lista_vedidos;
 /**
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -18,35 +18,35 @@ import model.Sueldo;
 public class sueldo_controller {
     
     public void Create (Sueldo sumo){
-        Tienda_controller.lista_sueldo.add(sumo);
+        Tienda_controller.lista_vedidos.add(sumo);
     }
     
     public void Update(int index , Sueldo sumo){
-        Tienda_controller.lista_sueldo.set(index, sumo);
+        Tienda_controller.lista_vedidos.set(index, sumo);
     }
     
     public Sueldo read (int index){
-       return Tienda_controller.lista_sueldo.get(index);
+       return Tienda_controller.lista_vedidos.get(index);
        
     }
     
     public void Delete (int index){
-        Tienda_controller.lista_sueldo.remove(index);
+        Tienda_controller.lista_vedidos.remove(index);
     }
     
       public ArrayList<Sueldo> Read(String Filter) {
         ArrayList<Sueldo> Get = new ArrayList<>();
-        Tienda_controller.lista_sueldo.stream().filter((s1) -> (s1.getNombre_vende().contains(Filter))).forEachOrdered((s1) -> {
+        Tienda_controller.lista_vedidos.stream().filter((s1) -> (s1.getNombre_vende().contains(Filter))).forEachOrdered((s1) -> {
             Get.add(s1);
         });
         return Get;
     }
     
      public void admintabla1(javax.swing.JTable tblSueldoPagar) {
-        Object[][] matriz = new Object[lista_sueldo.size()][2];
-        for (int i = 0; i < lista_sueldo.size(); i++) {
-            matriz[i][0] = lista_sueldo.get(i).getCodigo_vende();
-            matriz[i][1] = lista_sueldo.get(i).getSueldo();
+        Object[][] matriz = new Object[lista_vedidos.size()][2];
+        for (int i = 0; i < lista_vedidos.size(); i++) {
+            matriz[i][0] = lista_vedidos.get(i).getCodigo_vende();
+            matriz[i][1] = lista_vedidos.get(i).getSueldo();
         }
 
 

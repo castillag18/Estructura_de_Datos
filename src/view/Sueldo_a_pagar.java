@@ -12,6 +12,7 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Sueldo;
+import javax.swing.table.DefaultTableModel;
 
 public class Sueldo_a_pagar extends javax.swing.JFrame {
 
@@ -22,9 +23,11 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         sumo.admintabla1(tblSueldoPagar);
+
     }
     Tienda_controller tienco = new Tienda_controller();
     sueldo_controller sumo = new sueldo_controller();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -161,9 +164,7 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         ArrayList<tienda> mayores = tienco.getLista_venta();
-        
-        
-        
+
         for (int i = 0; i < tienco.getLista_venta().size(); i++) {
             tienco.getLista_sueldo().add(new Sueldo(
                     0,
@@ -171,7 +172,7 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
                     tienco.getLista_venta().get(i).getTotal_Vendido_en_pesos()
             ));
         }
-        
+
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
@@ -189,12 +190,12 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-    this.setState(Sueldo_a_pagar.ICONIFIED);
+        this.setState(Sueldo_a_pagar.ICONIFIED);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-    sumo.Read(txtDigiteCodigo.getText());
-    sumo.admintabla1(tblSueldoPagar);
+        sumo.Read(txtDigiteCodigo.getText());
+        sumo.admintabla1(tblSueldoPagar);
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**

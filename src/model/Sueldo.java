@@ -13,7 +13,7 @@ package model;
 public class Sueldo extends tienda{
     private double sueldo;
 
-    public Sueldo(double sueldo, String Codigo_del_vende, double Total_Vendido_en_pesos) {
+    public Sueldo(double sueldo, String Codigo_del_vende, int Total_cantidades_vendidas, double Total_Vendido_en_pesos) {
         super(Codigo_del_vende, Total_Vendido_en_pesos);
         this.sueldo = sueldo;
     }

@@ -13,6 +13,7 @@ import model.tienda;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,8 +29,7 @@ public class venta extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(true);
-        tiendaco.adminTabla(tblVenta);
-
+        tiendaco.adminTabla((DefaultTableModel) tblVenta.getModel(), tiendaco.getLista_venta());
     }
 
     Tienda_controller tiendaco = new Tienda_controller();
@@ -310,21 +310,23 @@ public class venta extends javax.swing.JFrame {
             if (txtCodigo_vendedor.getText().length() == 8 && txtConprador.getText().length() == 8 && txtCodigoProducto.getText().length() == 8) {
                 tiendaco.create(new tienda(txtCodigo_vendedor.getText(), txtConprador.getText(),
                         txtCodigoProducto.getText(), Integer.parseInt(txtPrecioUnidad.getText()), Integer.parseInt(txtCantidadVendida.getText())));
-                tiendaco.adminTabla(tblVenta);
+                tiendaco.adminTabla((DefaultTableModel) tblVenta.getModel(), tiendaco.getLista_venta());
                 txtTotalVenta.setText(String.valueOf(tiendaco.result()));
                 borrartxt();
-            }
+                
+                tiendaco.getLista_sueldo().add(new Sueldo)
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "los CODIGOS debe tener 8 digitos");
+             // JOptionPane.showMessageDialog(null, "los CODIGOS debe tener 8 digitos.\nEl CODIGO ingresado contiene " + txtCodigo_vendedor.getText().length() + " digitos.", "ERROR", 2);
 
-            if (txtCodigo_vendedor.getText().length() > 8 || txtCodigo_vendedor.getText().length() < 8) {
-                JOptionPane.showMessageDialog(null, "El CODIGO DEL VENDEDOR debe tener 8 digitos.\nEl CODIGO ingresado contiene " + txtCodigo_vendedor.getText().length() + " digitos.", "ERROR", 2);
             }
-            if (txtConprador.getText().length() > 8 || txtConprador.getText().length() < 8) {
-                JOptionPane.showMessageDialog(null, "El CODIGO DEL COMPRADOR debe tener 8 digitos.\nEl CODIGO ingresado contiene " + txtConprador.getText().length() + " digitos.", "ERROR", 2);
-            }
-            if (txtCodigoProducto.getText().length() > 8 || txtCodigoProducto.getText().length() < 8) {
-                JOptionPane.showMessageDialog(null, "El CODIGO DEL COMPRADOR debe tener 8 digitos.\nEl CODIGO ingresado contiene " + txtCodigoProducto.getText().length() + " digitos.", "ERROR", 2);
-            }
-
+//            if ((txtCodigo_vendedor.getText().length() > 8 || txtCodigo_vendedor.getText().length() < 8) && (txtCodigoProducto.getText().length() > 8 || txtCodigoProducto.getText().length() < 8) && (txtConprador.getText().length() > 8 || txtConprador.getText().length() < 8)) {
+//                JOptionPane.showMessageDialog(null, "El CODIGO DEL VENDEDOR debe tener 8 digitos.\nEl CODIGO ingresado contiene " + txtCodigo_vendedor.getText().length() + " digitos.", "ERROR", 2);
+//                JOptionPane.showMessageDialog(null, "El CODIGO DEL PRODUCTO debe tener 8 digitos.\nEl CODIGO ingresado contiene " + txtCodigoProducto.getText().length() + " digitos.", "ERROR", 2);
+//                JOptionPane.showMessageDialog(null, "El CODIGO DEL COMPRADOR debe tener 8 digitos.\nEl CODIGO ingresado contiene " + txtConprador.getText().length() + " digitos.", "ERROR", 2);
+//
+//            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "*Complete todos los campos requeridos ", "ERROR", 2);
         }

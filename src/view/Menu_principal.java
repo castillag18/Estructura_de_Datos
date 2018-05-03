@@ -5,6 +5,8 @@
  */
 package view;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import model.tienda;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
@@ -21,8 +23,8 @@ public class Menu_principal extends javax.swing.JFrame {
     public Menu_principal() {
         initComponents();
         this.setLocationRelativeTo(null);
-    }
 
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -49,6 +51,7 @@ public class Menu_principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setIconImage(getIconImage());
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -211,7 +214,7 @@ public class Menu_principal extends javax.swing.JFrame {
         });
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 394, 70, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 470));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 460));
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setBorder(null);
@@ -393,18 +396,18 @@ public class Menu_principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMayor_VentaActionPerformed
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-        
+
     }//GEN-LAST:event_jPanel1MousePressed
-int xx,xy;
+    int xx, xy;
     private void jMenuBar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuBar1MousePressed
-      xx = evt.getX();
-      xy = evt.getY();
+        xx = evt.getX();
+        xy = evt.getY();
     }//GEN-LAST:event_jMenuBar1MousePressed
 
     private void jMenuBar1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuBar1MouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        
+
         setLocation(x - xx, y - xy);
     }//GEN-LAST:event_jMenuBar1MouseDragged
 

@@ -14,10 +14,7 @@ import model.tienda;
 import model.Sueldo;
 import view.*;
 
-/**
- *
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
+
 public class Registro_de_venta_por_vendedor extends javax.swing.JFrame {
 
     /**
@@ -93,6 +90,11 @@ public class Registro_de_venta_por_vendedor extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         txtNombreVende.setBackground(new java.awt.Color(204, 204, 204));
+        txtNombreVende.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreVendeActionPerformed(evt);
+            }
+        });
         txtNombreVende.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreVendeKeyTyped(evt);
@@ -370,6 +372,10 @@ public class Registro_de_venta_por_vendedor extends javax.swing.JFrame {
             txtCodigoVende.transferFocus();
         }
     }//GEN-LAST:event_txtTotalVendidoKeyTyped
+
+    private void txtNombreVendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreVendeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreVendeActionPerformed
     public void borrartxt() {
         String b = "";
         txtCantidadVendidas.setText(b);
