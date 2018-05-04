@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import model.Sueldo;
 
 /**
  *
@@ -308,17 +309,53 @@ public class venta extends javax.swing.JFrame {
     private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
         try {
             if (txtCodigo_vendedor.getText().length() == 8 && txtConprador.getText().length() == 8 && txtCodigoProducto.getText().length() == 8) {
-                tiendaco.create(new tienda(txtCodigo_vendedor.getText(), txtConprador.getText(),
-                        txtCodigoProducto.getText(), Integer.parseInt(txtPrecioUnidad.getText()), Integer.parseInt(txtCantidadVendida.getText())));
+                tiendaco.create(new tienda(
+                        txtCodigo_vendedor.getText(),
+                        txtConprador.getText(),
+                        txtCodigoProducto.getText(),
+                        Integer.parseInt(txtPrecioUnidad.getText()),
+                        Integer.parseInt(txtCantidadVendida.getText())));
+
                 tiendaco.adminTabla((DefaultTableModel) tblVenta.getModel(), tiendaco.getLista_venta());
                 txtTotalVenta.setText(String.valueOf(tiendaco.result()));
+                boolean valido = false;
+
+                if (tiendaco.getLista_sueldo().size() == 0) {
+                    tiendaco.getLista_sueldo().add(new Sueldo(
+                            0,
+                            txtCodigo_vendedor.getText(),
+                            0,
+                            0
+                    ));
+                } else {
+                    valido = false;
+                    for (int i = 0; i < tiendaco.getLista_sueldo().size(); i++) {
+                        if (!txtCodigo_vendedor.getText().equals(tiendaco.getLista_sueldo().get(i).getCodigo_del_vende())) {
+                            valido = true;
+                            System.out.println("diferente");
+                        } else {
+                            System.out.println("encontrado");
+                            valido = false;
+                            i = tiendaco.getLista_sueldo().size();
+                        }
+                    }
+
+                    if (valido) {
+                        tiendaco.getLista_sueldo().add(new Sueldo(
+                                0,
+                                txtCodigo_vendedor.getText(),
+                                0,
+                                0
+                        ));                        
+                    }
+                }
+
                 borrartxt();
-                
+
                 //tiendaco.getLista_sueldo().add(new Sueldo)
-                
             } else {
                 JOptionPane.showMessageDialog(null, "los CODIGOS debe tener 8 digitos");
-             // JOptionPane.showMessageDialog(null, "los CODIGOS debe tener 8 digitos.\nEl CODIGO ingresado contiene " + txtCodigo_vendedor.getText().length() + " digitos.", "ERROR", 2);
+                // JOptionPane.showMessageDialog(null, "los CODIGOS debe tener 8 digitos.\nEl CODIGO ingresado contiene " + txtCodigo_vendedor.getText().length() + " digitos.", "ERROR", 2);
 
             }
 //            if ((txtCodigo_vendedor.getText().length() > 8 || txtCodigo_vendedor.getText().length() < 8) && (txtCodigoProducto.getText().length() > 8 || txtCodigoProducto.getText().length() < 8) && (txtConprador.getText().length() > 8 || txtConprador.getText().length() < 8)) {
