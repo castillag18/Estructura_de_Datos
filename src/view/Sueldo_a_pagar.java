@@ -22,7 +22,7 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
     public Sueldo_a_pagar() {
         initComponents();
         this.setLocationRelativeTo(null);
-        sumo.admintabla1(tblSueldoPagar);
+        //sumo.admintabla1(tblSueldoPagar);
 
     }
     Tienda_controller tienco = new Tienda_controller();
@@ -112,12 +112,12 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Saldo"
+                "Codigo", "Cantidades", "Total en pesos", "Sueldo"
             }
         ));
         jScrollPane1.setViewportView(tblSueldoPagar);
         if (tblSueldoPagar.getColumnModel().getColumnCount() > 0) {
-            tblSueldoPagar.getColumnModel().getColumn(1).setResizable(false);
+            tblSueldoPagar.getColumnModel().getColumn(3).setResizable(false);
         }
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 610, 180));
@@ -182,24 +182,23 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
         int index_unico = 0;
         int cant_sum = 0;
         double mon_sum = 0;
- 
+
         for (int i = 0; i < tienco.getLista_sueldo().size(); i++) {
             cant_sum = 0;
             mon_sum = 0;
             for (int j = 0; j < tienco.getLista_venta().size(); j++) {
-                if(tienco.getLista_sueldo().get(i).getCodigo_del_vende().equals(tienco.getLista_venta().get(j).getCodigo_del_vende())){
-                   cant_sum +=  tienco.getLista_venta().get(j).getCantidad_vendida();
-                   mon_sum += tienco.getLista_venta().get(j).getPrecio_unidad()*tienco.getLista_venta().get(j).getCantidad_vendida();
-                   tienco.getLista_sueldo().get(i).setTotal_Vendido_en_pesos(mon_sum);
-                   tienco.getLista_sueldo().get(i).setCantidades_totales_vendidas(cant_sum);
+                if (tienco.getLista_sueldo().get(i).getCodigo_del_vende().equals(tienco.getLista_venta().get(j).getCodigo_del_vende())) {
+                    cant_sum += tienco.getLista_venta().get(j).getCantidad_vendida();
+                    mon_sum += tienco.getLista_venta().get(j).getPrecio_unidad() * tienco.getLista_venta().get(j).getCantidad_vendida();
+                    tienco.getLista_sueldo().get(i).setTotal_Vendido_en_pesos(mon_sum);
+                    tienco.getLista_sueldo().get(i).setCantidades_totales_vendidas(cant_sum);                    
                 }
             }
         }
-       
 
         System.out.println("===========");
         for (int i = 0; i < tienco.getLista_sueldo().size(); i++) {
-            System.out.println(tienco.getLista_sueldo().get(i).getCodigo_del_vende() + " dinero: " +  tienco.getLista_sueldo().get(i).getTotal_Vendido_en_pesos()+ " | cantidad: "+ tienco.getLista_sueldo().get(i).getCantidades_totales_vendidas());
+            System.out.println(tienco.getLista_sueldo().get(i).getCodigo_del_vende() + " dinero: " + tienco.getLista_sueldo().get(i).getTotal_Vendido_en_pesos() + " | cantidad: " + tienco.getLista_sueldo().get(i).getCantidades_totales_vendidas());
         }
 
     }
@@ -246,7 +245,14 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         test();
+        
+        
+        for (int j = 0; j < tienco.getLista_venta().size(); j++) {
+            Sueldo s1 =  tienco.getLista_sueldo().get(j);
+            s1.setSueldo(s1.getTotal_Vendido_en_pesos()*0.3);
 
+        }
+        sumo.adminTabla((DefaultTableModel) tblSueldoPagar.getModel());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

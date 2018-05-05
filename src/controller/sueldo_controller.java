@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 import model.Sueldo;
 import static controller.Tienda_controller.lista_vedidos;
+import javax.swing.table.DefaultTableModel;
 /**
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -40,6 +41,27 @@ public class sueldo_controller {
             Get.add(s1);
         });
         return Get;
+    }
+      
+      public void adminTabla(
+            DefaultTableModel tbl            
+    ) {
+
+        while (tbl.getRowCount() != 0) {
+            tbl.removeRow(0);
+        }
+
+        for (int i = 0; i < lista_vedidos.size(); i++) {
+            tbl.addRow(new Object[]{
+                lista_vedidos.get(i).getCodigo_del_vende(),
+                lista_vedidos.get(i).getCantidades_totales_vendidas(),
+                lista_vedidos.get(i).getTotal_Vendido_en_pesos(),
+                lista_vedidos.get(i).getSueldo()                
+
+            });
+
+        }
+
     }
     
      public void admintabla1(javax.swing.JTable tblSueldoPagar) {
@@ -73,10 +95,6 @@ public class sueldo_controller {
 
         }
 
-    }
-
-    public void admintabla1(JTable tblSueldoPagar, ArrayList<Sueldo> Read) {
-    
     }
     
 
