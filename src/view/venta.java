@@ -6,7 +6,7 @@
 package view;
 
 import controller.Tienda_controller;
-import controller.sueldo_controller;
+import controller.VendedorController;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import model.tienda;
@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import model.Sueldo;
+import model.Vendedor;
 
 /**
  *
@@ -26,15 +26,15 @@ public class venta extends javax.swing.JFrame {
      * Creates new form vista_tienda
      */
     public venta() {
-
         initComponents();
         setLocationRelativeTo(null);
         setResizable(true);
         tiendaco.adminTabla((DefaultTableModel) tblVenta.getModel(), tiendaco.getLista_venta());
+        llenar_combo();
     }
 
     Tienda_controller tiendaco = new Tienda_controller();
-    sueldo_controller suco = new sueldo_controller();
+    VendedorController vende = new VendedorController();
     int tiend;
 
     @SuppressWarnings("unchecked")
@@ -45,13 +45,10 @@ public class venta extends javax.swing.JFrame {
         jpIngrese = new javax.swing.JPanel();
         btnVenta = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        txtCodigo_vendedor = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtConprador = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtCodigoProducto = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtTotalVenta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtPrecioUnidad = new javax.swing.JTextField();
@@ -61,6 +58,8 @@ public class venta extends javax.swing.JFrame {
         tblVenta = new javax.swing.JTable();
         btnRegresa = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        btn_RgistrarVendedor = new javax.swing.JButton();
+        cmbx_Vendedor = new javax.swing.JComboBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -68,6 +67,13 @@ public class venta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpIngrese.setBackground(new java.awt.Color(255, 255, 255));
@@ -80,7 +86,7 @@ public class venta extends javax.swing.JFrame {
         btnVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cart (1).png"))); // NOI18N
         btnVenta.setText("Venta");
         btnVenta.setBorder(null);
-        btnVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVenta.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 btnVentaMouseMoved(evt);
@@ -104,21 +110,8 @@ public class venta extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(238, 112, 82));
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel1.setText("*Código del vendedor:");
+        jLabel1.setText("*vendedor:");
         jpIngrese.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
-
-        txtCodigo_vendedor.setBackground(new java.awt.Color(204, 204, 204));
-        txtCodigo_vendedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigo_vendedorActionPerformed(evt);
-            }
-        });
-        txtCodigo_vendedor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCodigo_vendedorKeyTyped(evt);
-            }
-        });
-        jpIngrese.add(txtCodigo_vendedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 150, -1));
 
         jLabel2.setBackground(new java.awt.Color(238, 112, 82));
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
@@ -152,21 +145,6 @@ public class venta extends javax.swing.JFrame {
             }
         });
         jpIngrese.add(txtCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 150, -1));
-
-        jLabel4.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel4.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cash-register_2.png"))); // NOI18N
-        jLabel4.setText("Total Compra:");
-        jpIngrese.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 410, -1, -1));
-
-        txtTotalVenta.setBackground(new java.awt.Color(204, 204, 204));
-        txtTotalVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTotalVentaActionPerformed(evt);
-            }
-        });
-        jpIngrese.add(txtTotalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 140, 30));
 
         jLabel5.setBackground(new java.awt.Color(238, 112, 82));
         jLabel5.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
@@ -203,9 +181,7 @@ public class venta extends javax.swing.JFrame {
         });
         jpIngrese.add(txtCantidadVendida, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 150, -1));
 
-        tblVenta.setBackground(new java.awt.Color(255, 255, 255));
         tblVenta.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
-        tblVenta.setForeground(new java.awt.Color(0, 0, 0));
         tblVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -231,7 +207,7 @@ public class venta extends javax.swing.JFrame {
         btnRegresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/left-arrow.png"))); // NOI18N
         btnRegresa.setText("Regresar al menu");
         btnRegresa.setBorder(null);
-        btnRegresa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresa.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 btnRegresaMouseMoved(evt);
@@ -257,7 +233,19 @@ public class venta extends javax.swing.JFrame {
         jLabel8.setText("*Campo Obligatorio");
         jpIngrese.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
-        getContentPane().add(jpIngrese, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 470));
+        btn_RgistrarVendedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/network_1.png"))); // NOI18N
+        btn_RgistrarVendedor.setText("Registrar Vendedor");
+        btn_RgistrarVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_RgistrarVendedorActionPerformed(evt);
+            }
+        });
+        jpIngrese.add(btn_RgistrarVendedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, -1, -1));
+
+        cmbx_Vendedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jpIngrese.add(cmbx_Vendedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 150, -1));
+
+        getContentPane().add(jpIngrese, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 460));
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setBorder(null);
@@ -308,62 +296,18 @@ public class venta extends javax.swing.JFrame {
 
     private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
         try {
-            if (txtCodigo_vendedor.getText().length() == 8 && txtConprador.getText().length() == 8 && txtCodigoProducto.getText().length() == 8) {
+            if (cmbx_Vendedor.getItemCount() > 0 && txtConprador.getText().length() == 8 && txtCodigoProducto.getText().length() == 8) {
                 tiendaco.create(new tienda(
-                        txtCodigo_vendedor.getText(),
+                        vende.Read(cmbx_Vendedor.getSelectedItem().toString()),
                         txtConprador.getText(),
                         txtCodigoProducto.getText(),
                         Integer.parseInt(txtPrecioUnidad.getText()),
                         Integer.parseInt(txtCantidadVendida.getText())));
-
                 tiendaco.adminTabla((DefaultTableModel) tblVenta.getModel(), tiendaco.getLista_venta());
-                txtTotalVenta.setText(String.valueOf(tiendaco.result()));
-                boolean valido = false;
-
-                if (tiendaco.getLista_sueldo().size() == 0) {
-                    tiendaco.getLista_sueldo().add(new Sueldo(
-                            0,
-                            txtCodigo_vendedor.getText(),
-                            0,
-                            0
-                    ));
-                } else {
-                    valido = false;
-                    for (int i = 0; i < tiendaco.getLista_sueldo().size(); i++) {
-                        if (!txtCodigo_vendedor.getText().equals(tiendaco.getLista_sueldo().get(i).getCodigo_del_vende())) {
-                            valido = true;
-                            System.out.println("diferente");
-                        } else {
-                            System.out.println("encontrado");
-                            valido = false;
-                            i = tiendaco.getLista_sueldo().size();
-                        }
-                    }
-
-                    if (valido) {
-                        tiendaco.getLista_sueldo().add(new Sueldo(
-                                0,
-                                txtCodigo_vendedor.getText(),
-                                0,
-                                0
-                        ));                        
-                    }
-                }
-
                 borrartxt();
-
-                //tiendaco.getLista_sueldo().add(new Sueldo)
             } else {
                 JOptionPane.showMessageDialog(null, "los CODIGOS debe tener 8 digitos");
-                // JOptionPane.showMessageDialog(null, "los CODIGOS debe tener 8 digitos.\nEl CODIGO ingresado contiene " + txtCodigo_vendedor.getText().length() + " digitos.", "ERROR", 2);
-
             }
-//            if ((txtCodigo_vendedor.getText().length() > 8 || txtCodigo_vendedor.getText().length() < 8) && (txtCodigoProducto.getText().length() > 8 || txtCodigoProducto.getText().length() < 8) && (txtConprador.getText().length() > 8 || txtConprador.getText().length() < 8)) {
-//                JOptionPane.showMessageDialog(null, "El CODIGO DEL VENDEDOR debe tener 8 digitos.\nEl CODIGO ingresado contiene " + txtCodigo_vendedor.getText().length() + " digitos.", "ERROR", 2);
-//                JOptionPane.showMessageDialog(null, "El CODIGO DEL PRODUCTO debe tener 8 digitos.\nEl CODIGO ingresado contiene " + txtCodigoProducto.getText().length() + " digitos.", "ERROR", 2);
-//                JOptionPane.showMessageDialog(null, "El CODIGO DEL COMPRADOR debe tener 8 digitos.\nEl CODIGO ingresado contiene " + txtConprador.getText().length() + " digitos.", "ERROR", 2);
-//
-//            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "*Complete todos los campos requeridos ", "ERROR", 2);
         }
@@ -371,6 +315,19 @@ public class venta extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnVentaActionPerformed
 
+    public void llenar_combo(){
+        cmbx_Vendedor.removeAllItems();
+        
+        for (int i = 0; i < vende.getLista_Vendedor().size(); i++) {
+            cmbx_Vendedor.addItem(vende.getLista_Vendedor().get(i).getCodigo());
+            System.out.print("\n"+i+"  "+vende.getLista_Vendedor().get(i).getCodigo());
+        }
+        System.out.println(cmbx_Vendedor.getItemCount());
+        for (int i = 0; i < vende.getLista_Vendedor().size(); i++) {
+            System.out.print("\n"+vende.getLista_Vendedor().get(i).getCodigo());
+        }
+    }
+    
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         int cerrar = JOptionPane.YES_NO_OPTION;
         int result = JOptionPane.showConfirmDialog(null, "Desea cerrar sesion?", "Exit", cerrar);
@@ -379,17 +336,9 @@ public class venta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void txtCodigo_vendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigo_vendedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigo_vendedorActionPerformed
-
     private void txtConpradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConpradorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtConpradorActionPerformed
-
-    private void txtTotalVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalVentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalVentaActionPerformed
 
     private void btnVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentaMouseClicked
 
@@ -437,30 +386,6 @@ public class venta extends javax.swing.JFrame {
         setLocation(x - xx, y - xy);
     }//GEN-LAST:event_jMenuBar1MouseDragged
 
-    private void txtCodigo_vendedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigo_vendedorKeyTyped
-        int k = (int) evt.getKeyChar();
-        if (k >= 97 && k <= 122 || k >= 65 && k <= 90) {
-            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
-            JOptionPane.showMessageDialog(null, "No puede ingresar letras", "Error Datos", JOptionPane.ERROR_MESSAGE);
-        }
-        if (k == 241 || k == 209) {
-            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
-            JOptionPane.showMessageDialog(null, "No puede ingresar letras", "Error Datos", JOptionPane.ERROR_MESSAGE);
-        }
-        char caracter = evt.getKeyChar();
-
-        // Verificar si la tecla pulsada no es un digito
-        if (((caracter < '0')
-                || (caracter > '9'))
-                && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
-            evt.consume();  // ignorar el evento de teclado
-        }
-
-        if (k == 8) {
-            txtCodigo_vendedor.transferFocus();
-        }
-    }//GEN-LAST:event_txtCodigo_vendedorKeyTyped
-
     private void txtCodigoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProductoKeyTyped
         int k = (int) evt.getKeyChar();
         if (k >= 97 && k <= 122 || k >= 65 && k <= 90) {
@@ -479,10 +404,10 @@ public class venta extends javax.swing.JFrame {
                 && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
             evt.consume();  // ignorar el evento de teclado
         }
-
-        if (k == 8) {
-            txtCodigoProducto.transferFocus();
-        }
+//
+//        if (k == 8) {
+//            txtCodigoProducto.transferFocus();
+//        }
     }//GEN-LAST:event_txtCodigoProductoKeyTyped
 
     private void txtConpradorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConpradorKeyTyped
@@ -504,9 +429,9 @@ public class venta extends javax.swing.JFrame {
             evt.consume();  // ignorar el evento de teclado
         }
 
-        if (k == 8) {
-            txtConprador.transferFocus();
-        }
+//        if (k == 8) {
+//            txtConprador.transferFocus();
+//        }
     }//GEN-LAST:event_txtConpradorKeyTyped
 
     private void txtPrecioUnidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioUnidadKeyTyped
@@ -551,20 +476,27 @@ public class venta extends javax.swing.JFrame {
                 && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
             evt.consume();  // ignorar el evento de teclado
         }
-
-        if (k == 8) {
-            txtCantidadVendida.transferFocus();
-        }
+//
+//        if (k == 8) {
+//            txtCantidadVendida.transferFocus();
+//        }
     }//GEN-LAST:event_txtCantidadVendidaKeyTyped
+
+    private void btn_RgistrarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RgistrarVendedorActionPerformed
+        new VendedorView();
+    }//GEN-LAST:event_btn_RgistrarVendedorActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        llenar_combo();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     public void borrartxt() {
         String b = "";
         txtCantidadVendida.setText(b);
         txtCodigoProducto.setText(b);
-        txtCodigo_vendedor.setText(b);
+        cmbx_Vendedor.setSelectedIndex(0);
         txtConprador.setText(b);
         txtPrecioUnidad.setText(b);
-        txtTotalVenta.setText(b);
     }
 
     private Boolean ValTend(String txtCantidadVendida, String txtCodigoProducto, String txtCodigo_vendedor, String txtConprador, String txtPrecioUnidad) {
@@ -629,10 +561,11 @@ public class venta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegresa;
     private javax.swing.JButton btnVenta;
+    private javax.swing.JButton btn_RgistrarVendedor;
+    private javax.swing.JComboBox cmbx_Vendedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -646,9 +579,7 @@ public class venta extends javax.swing.JFrame {
     private static javax.swing.JTable tblVenta;
     private javax.swing.JTextField txtCantidadVendida;
     private javax.swing.JTextField txtCodigoProducto;
-    private javax.swing.JTextField txtCodigo_vendedor;
     private javax.swing.JTextField txtConprador;
     private javax.swing.JTextField txtPrecioUnidad;
-    private javax.swing.JTextField txtTotalVenta;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,14 +5,9 @@
  */
 package view;
 
-import java.text.Normalizer;
 import javax.swing.JOptionPane;
-import java.util.AbstractList;
 import controller.Tienda_controller;
-import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import model.Sueldo;
-import model.tienda;
 
 /**
  *
@@ -26,10 +21,7 @@ public class Mayores_ventas extends javax.swing.JFrame {
     public Mayores_ventas() {
         initComponents();
         this.setLocationRelativeTo(null);
-        if (tienco.getLista_sueldo().size() != 0) {
-           getMayores(); 
-        }
-        
+        tienco.admintable((DefaultTableModel) tblMayoresVentas.getModel(), tienco.GenerarSueldo());
     }
     
     Tienda_controller tienco = new Tienda_controller();
@@ -47,7 +39,6 @@ public class Mayores_ventas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMayoresVentas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        btnGenerar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -66,7 +57,7 @@ public class Mayores_ventas extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/left-arrow.png"))); // NOI18N
         jButton1.setText("Regresar al Menu");
         jButton1.setBorder(null);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -86,12 +77,28 @@ public class Mayores_ventas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo Vendedor", "Nombre Vendedor", "Total Ventas", "Sueldo Vendedor"
+                "Nombre", "Codigo", "Cantidades Vendidas", "Total Vendido", "Sueldo"
             }
-        ));
-        jScrollPane1.setViewportView(tblMayoresVentas);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 600, 170));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblMayoresVentas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblMayoresVentas);
+        if (tblMayoresVentas.getColumnModel().getColumnCount() > 0) {
+            tblMayoresVentas.getColumnModel().getColumn(0).setResizable(false);
+            tblMayoresVentas.getColumnModel().getColumn(1).setResizable(false);
+            tblMayoresVentas.getColumnModel().getColumn(2).setResizable(false);
+            tblMayoresVentas.getColumnModel().getColumn(3).setResizable(false);
+            tblMayoresVentas.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 600, 280));
 
         jLabel1.setBackground(new java.awt.Color(238, 112, 82));
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
@@ -99,20 +106,6 @@ public class Mayores_ventas extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph.png"))); // NOI18N
         jLabel1.setText("MAYORES VENTAS");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 140, 40));
-
-        btnGenerar.setBackground(new java.awt.Color(204, 204, 204));
-        btnGenerar.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
-        btnGenerar.setForeground(new java.awt.Color(238, 112, 82));
-        btnGenerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/estadisticas.png"))); // NOI18N
-        btnGenerar.setText("GENERAR ESTADISTICAS");
-        btnGenerar.setBorder(null);
-        btnGenerar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 170, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 460));
 
@@ -123,12 +116,12 @@ public class Mayores_ventas extends javax.swing.JFrame {
         jMenu1.setForeground(new java.awt.Color(238, 112, 82));
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout (1).png"))); // NOI18N
         jMenu1.setText("Salir");
-        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenuItem1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout.png"))); // NOI18N
         jMenuItem1.setText("Cerrar Seccion");
-        jMenuItem1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenuItem1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -139,7 +132,7 @@ public class Mayores_ventas extends javax.swing.JFrame {
         jMenuItem2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/down-arrow.png"))); // NOI18N
         jMenuItem2.setText("Minimizar");
-        jMenuItem2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenuItem2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -157,21 +150,6 @@ public class Mayores_ventas extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    public void  getMayores(){
-        ArrayList<Sueldo> mayores = tienco.getLista_sueldo();
-        Sueldo temp_Sueldo = new Sueldo();
-        for (int i = 0; i < mayores.size(); i++) {
-            for (int x = 0; x < mayores.size(); x++) {
-                if(mayores.get(i).getSueldo() >= mayores.get(x).getSueldo()){
-                    temp_Sueldo = mayores.get(x);
-                    mayores.set(x, mayores.get(i));
-                    mayores.set(i, mayores.get(x));
-                }
-            }
-        }
-        tienco.mayores_tbl((DefaultTableModel) tblMayoresVentas.getModel(), mayores);
-    }
     
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         Menu_principal menu = new Menu_principal();
@@ -190,10 +168,6 @@ public class Mayores_ventas extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         this.setState(Mayores_ventas.ICONIFIED);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-       
-    }//GEN-LAST:event_btnGenerarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,7 +205,6 @@ public class Mayores_ventas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGenerar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;

@@ -11,19 +11,11 @@ import model.tienda;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
-/**
- *
- * @author Guergachi <sguergachi at gmail.com>
- */
 public class Menu_principal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu_principal
-     */
     public Menu_principal() {
         initComponents();
         this.setLocationRelativeTo(null);
-
     }
 
     @SuppressWarnings("unchecked")
