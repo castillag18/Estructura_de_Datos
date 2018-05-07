@@ -99,6 +99,25 @@ public class Tienda_controller {
 
     }
 
+    public void mayores_tbl(
+            DefaultTableModel tblventa,
+            ArrayList<Sueldo> lista
+    ) {
+        while (tblventa.getRowCount() != 0) {
+            tblventa.removeRow(0);
+        }
+
+        for (int i = 0; i < lista.size(); i++) {
+            tblventa.addRow(new Object[]{
+                lista.get(i).getCodigo_del_vende(),
+                lista.get(i).getNombre_vende(),
+                lista.get(i).getTotal_Vendido_en_pesos(),
+                lista.get(i).getSueldo()
+            });
+
+        }
+    }
+
     public void admintable(javax.swing.JTable tblRegistroVenta) {
         Object[][] matriz = new Object[lista_venta.size()][4];
         for (int i = 0; i < lista_venta.size(); i++) {

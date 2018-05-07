@@ -9,7 +9,10 @@ import java.text.Normalizer;
 import javax.swing.JOptionPane;
 import java.util.AbstractList;
 import controller.Tienda_controller;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import model.Sueldo;
+import model.tienda;
 
 /**
  *
@@ -23,6 +26,9 @@ public class Mayores_ventas extends javax.swing.JFrame {
     public Mayores_ventas() {
         initComponents();
         this.setLocationRelativeTo(null);
+        if (tienco.getLista_sueldo().size() != 0) {
+           getMayores(); 
+        }
         
     }
     
@@ -152,6 +158,21 @@ public class Mayores_ventas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void  getMayores(){
+        ArrayList<Sueldo> mayores = tienco.getLista_sueldo();
+        Sueldo temp_Sueldo = new Sueldo();
+        for (int i = 0; i < mayores.size(); i++) {
+            for (int x = 0; x < mayores.size(); x++) {
+                if(mayores.get(i).getSueldo() >= mayores.get(x).getSueldo()){
+                    temp_Sueldo = mayores.get(x);
+                    mayores.set(x, mayores.get(i));
+                    mayores.set(i, mayores.get(x));
+                }
+            }
+        }
+        tienco.mayores_tbl((DefaultTableModel) tblMayoresVentas.getModel(), mayores);
+    }
+    
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         Menu_principal menu = new Menu_principal();
         menu.setVisible(true);

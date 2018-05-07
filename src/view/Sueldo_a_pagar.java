@@ -177,7 +177,7 @@ public class Sueldo_a_pagar extends javax.swing.JFrame {
 
     public void test() {
         //System.out.print("hola");
-        ArrayList<tienda> mayores = tienco.getLista_venta();
+        
         boolean cod_unico = false;
         int index_unico = 0;
         int cant_sum = 0;
